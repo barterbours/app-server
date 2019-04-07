@@ -1,0 +1,22 @@
+version: "3"
+services:
+  app:
+    build: .
+    command: "nodemon ."
+    depends_on:
+      - logic
+    ports:
+      - "8084:8084"
+    networks:
+      - backend
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  logic:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - backend
+networks:
+  ? backend
